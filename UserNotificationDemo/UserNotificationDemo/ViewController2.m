@@ -25,7 +25,7 @@
     self.wkwebView.navigationDelegate = self;
     self.wkwebView.frame = self.view.bounds;
     [self.view addSubview:self.wkwebView];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@""]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"URL"]];
     [self.wkwebView loadRequest:request];
 }
 
