@@ -13,15 +13,13 @@
 @interface ViewController2 ()<WKNavigationDelegate>
 
 @property (nonatomic, strong) WKWebView *wkwebView;
-@property (nonatomic, strong) NSString *requestID;
 
 @end
 
 @implementation ViewController2
 
 - (void)viewDidLoad {
-    // Do any additional setup after loading the view.
-    _requestID = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceString"];
+
     self.wkwebView = [[WKWebView alloc] init];
     self.wkwebView.backgroundColor = [UIColor whiteColor];
     self.wkwebView.navigationDelegate = self;
@@ -36,7 +34,7 @@
     NSString *absoluteStr = navigationAction.request.URL.absoluteString;
     if ([absoluteStr containsString:@"wdlink://PushJSRequest"]) {
         
-        NSString *str = [NSString stringWithFormat:@"getPushInfo(%@,'%@')", [Tool getCommonParam2], _requestID];
+        NSString *str = [NSString stringWithFormat:@"getPushInfo(%@,'%@')", [Tool getCommonParam2], [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceString"]];
         [self.wkwebView evaluateJavaScript:str completionHandler:^(id _Nullable label, NSError * _Nullable error) {
         }];
         decisionHandler(WKNavigationActionPolicyCancel);

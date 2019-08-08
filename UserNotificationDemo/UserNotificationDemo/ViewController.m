@@ -13,7 +13,6 @@
 @interface ViewController ()<UIWebViewDelegate>
 
 @property (nonatomic, strong) UIWebView *webView;
-@property (nonatomic, strong) NSString *requestID;
 
 @end
 
@@ -22,7 +21,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _requestID = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceString"];
     self.webView = [[UIWebView alloc] init];
     self.webView.delegate = self;
     self.webView.frame = self.view.bounds;
@@ -37,7 +35,7 @@
     NSString *absoluteStr = request.URL.absoluteString;
     if ([absoluteStr containsString:@"wdlink://PushJSRequest"]) {
 
-        NSString *str = [NSString stringWithFormat:@"getPushInfo(%@,'%@')", [Tool getCommonParam2], _requestID];
+        NSString *str = [NSString stringWithFormat:@"getPushInfo(%@,'%@')", [Tool getCommonParam2], [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceString"]];
         [self.webView stringByEvaluatingJavaScriptFromString:str];
         return NO;
     }
